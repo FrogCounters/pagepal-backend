@@ -1,4 +1,5 @@
 from models import *
+from helpers import *
 from firestore import *
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
@@ -29,7 +30,7 @@ async def get_books_document():
     docs = get_all_books()
     books_list = []
     for doc in docs:
-        print(doc, doc.to_dict())
+        # print(doc, doc.to_dict())
         books_list.append(doc.id)
     return {"books": books_list}
 
@@ -42,6 +43,14 @@ async def get_book_document(title):
 
 @app.post("/book")
 async def create_book_document(book: Book):
-    # print(book.text)
     insert_book(book.title, book.url, book.text, book.emotions, book.author, book.main_img)
     return JSONResponse(content={"success": "true"}, status_code=200)
+
+
+@app.post("/analyse")
+async def analyse_user_book(user: UserText):
+    emotions_list = []
+    for sentence in user.text.split("."):
+        print(analyse_text(sentence), "#########")
+        emotions_list.append(analyse_text(sentence))
+    return {"emotions": emotions_list}

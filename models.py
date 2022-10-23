@@ -8,3 +8,7 @@ class Book(BaseModel):
     emotions: list
     author: str
     main_img: str
+
+
+class UserText(BaseModel):
+    text: str
