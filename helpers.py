@@ -1,9 +1,9 @@
 import os
-from env import CFG
+from env import mail, password
 from expertai.nlapi.cloud.client import ExpertAiClient
 
-os.environ["EAI_USERNAME"] = CFG.mail[0]
-os.environ["EAI_PASSWORD"] = CFG.password[0]
+os.environ["EAI_USERNAME"] = mail
+os.environ["EAI_PASSWORD"] = password
 
 client = ExpertAiClient()
 

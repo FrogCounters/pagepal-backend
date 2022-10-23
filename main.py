@@ -51,6 +51,6 @@ async def create_book_document(book: Book):
 async def analyse_user_book(user: UserText):
     emotions_list = []
     for sentence in user.text.split("."):
-        print(analyse_text(sentence), "#########")
+        # print(analyse_text(sentence), "#########")
         emotions_list.append(analyse_text(sentence))
     return {"emotions": emotions_list}
