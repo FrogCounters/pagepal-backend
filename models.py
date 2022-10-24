@@ -6,6 +6,7 @@ class Book(BaseModel):
     url: str
     text: list
     emotions: list
+    hate_speech: list
     author: str
     main_img: str
 

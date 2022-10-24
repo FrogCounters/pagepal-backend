@@ -11,12 +11,13 @@ app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
-def insert_book(title, url, text, emotions, author, main_img):
+def insert_book(title, url, text, emotions, hate_speech, author, main_img):
     data = {
         u'title': title,
         u'url': url,
         u'text': text,
         u'emotions': emotions,
+        u'hate_speech': hate_speech,
         u'date_uploaded': datetime.utcnow(),
         u'author': author,
         u'main_img': main_img

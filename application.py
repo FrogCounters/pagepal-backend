@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# uvicorn main:app --reload
+# uvicorn application:app --reload
 # https://fastapi.tiangolo.com/tutorial/path-params/
 origins = ["*"]
 
@@ -43,7 +43,7 @@ async def get_book_document(title):
 
 @app.post("/book")
 async def create_book_document(book: Book):
-    insert_book(book.title, book.url, book.text, book.emotions, book.author, book.main_img)
+    insert_book(book.title, book.url, book.text, book.emotions, book.hate_speech, book.author, book.main_img)
     return JSONResponse(content={"success": "true"}, status_code=200)
 
 
