@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# uvicorn application:app --reload
+# uvicorn main:app --reload
 # https://fastapi.tiangolo.com/tutorial/path-params/
 origins = ["*"]
 
@@ -31,7 +31,7 @@ async def get_books_document():
     docs = get_all_books()
     books_list = []
     for doc in docs:
-        print((doc.get("main_img")))
+        # print((doc.get("main_img")))
         books_list.append({
             "title": doc.id,
             "author": doc.get("author"),
