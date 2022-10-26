@@ -31,8 +31,12 @@ async def get_books_document():
     docs = get_all_books()
     books_list = []
     for doc in docs:
-        # print(doc, doc.to_dict())
-        books_list.append(doc.id)
+        print((doc.get("main_img")))
+        books_list.append({
+            "title": doc.id,
+            "author": doc.get("author"),
+            "main_img": doc.get("main_img")
+        })
     return {"books": books_list}
 
 
