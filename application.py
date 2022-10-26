@@ -1,3 +1,4 @@
+import uuid
 from models import *
 from helpers import *
 from firestore import *
@@ -51,6 +52,18 @@ async def create_book_document(book: Book):
 async def analyse_user_book(user: UserText):
     emotions_list = []
     for sentence in user.text.split("."):
-        # print(analyse_text(sentence), "#########")
         emotions_list.append(analyse_text(sentence))
     return {"emotions": emotions_list}
+
+
+@app.get("/user_book/{book_id}")
+async def get_user_book_document(book_id):
+    doc = get_user_book(book_id)
+    return {book_id: doc}
+
+
+@app.post("/user_book")
+async def create_user_book_document(book: UserUrlBook):
+    book_id = str(uuid.uuid4().hex)[:16]
+    insert_user_book(book.title, book.text, book.emotions, book.hate_speech, book_id)
+    return JSONResponse(content={"url": book_id}, status_code=200)

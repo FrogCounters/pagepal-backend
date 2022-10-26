@@ -41,7 +41,27 @@ def get_all_books():
     return docs
 
 
+def insert_user_book(title, text, emotions, hate_speech, book_id):
+    data = {
+        u'title': title,
+        u'text': text,
+        u'emotions': emotions,
+        u'hate_speech': hate_speech,
+        u'date_uploaded': datetime.utcnow(),
+        u'book_id': book_id
+    }
+
+    db.collection("user_books").document(book_id).set(data)
+
+
+def get_user_book(book_id):
+    doc_ref = db.collection("user_books").document(book_id)
+    doc = doc_ref.get()
+    if doc.exists:
+        return doc.to_dict()
+    else:
+        return {}
+
+
 if __name__ == '__main__':
-    # insert_book("test title123", "ww.come", "hello", "ma")
     get_book("test title")
-    # get_all_books()
