@@ -51,9 +51,11 @@ async def create_book_document(book: Book):
 @app.post("/analyse")
 async def analyse_user_book(user: UserText):
     emotions_list = []
+    sentence_list = []
     for sentence in user.text.split("."):
         emotions_list.append(analyse_text(sentence))
-    return {"emotions": emotions_list}
+        sentence_list.append(sentence + '.' if sentence else '')
+    return {"emotions": emotions_list, "sentences": sentence_list}
 
 
 @app.get("/user_book/{book_id}")
