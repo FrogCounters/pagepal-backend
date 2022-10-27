@@ -56,9 +56,9 @@ async def create_book_document(book: Book):
 async def analyse_user_book(user: UserText):
     emotions_list = []
     sentence_list = []
-    for sentence in user.text.split("."):
+    for sentence in disambiguate_text(user.text):
         emotions_list.append(analyse_text(sentence))
-        sentence_list.append(sentence + '.' if sentence else '')
+        sentence_list.append(sentence)
     return {"emotions": emotions_list, "sentences": sentence_list}
 
 

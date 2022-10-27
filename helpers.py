@@ -7,6 +7,19 @@ os.environ["EAI_PASSWORD"] = password
 
 client = ExpertAiClient()
 
+def disambiguate_text(text: str):
+    language = 'en'
+
+    output = client.specific_resource_analysis(
+        body={"document": {"text": text}},
+        params={'language': language, 'resource': 'disambiguation'})
+        
+    list_of_sentences = []
+    for sentence in output.sentences:
+        list_of_sentences.append(text[sentence.start:sentence.end + 1])
+
+    return list_of_sentences
+    
 
 def analyse_text(text):
     detector = 'hate-speech'
@@ -34,3 +47,8 @@ def analyse_text(text):
 
 
 # analyse_text("I HATE YOU SO MUCH. get loss. you are so bad fat and ugly.")
+
+if __name__ == "__main__":
+    pass
+    # for x in disambiguate_text("I HATE YOU SO MUCH. Get lost! you are so bad fat and ugly."):
+    #     print(x)
